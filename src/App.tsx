@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import {RouterProvider} from "react-router-dom";
+import {router} from "./router";
+import {useCookies} from "react-cookie";
+import {useDispatch} from "react-redux";
+import {setTheme} from "./Reducers/General";
+import {DndProvider} from 'react-dnd'
+import {HTML5Backend} from 'react-dnd-html5-backend'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // Use dispatch
+    const dispatch = useDispatch();
+    // Use cookies to properly render theme
+    const [cookies] = useCookies(["theme"]);
+    useEffect(() => {
+        cookies.theme && dispatch(setTheme(parseInt(cookies.theme)));
+    });
+
+
+    return <DndProvider backend={HTML5Backend}><RouterProvider router={router}/></DndProvider>;
 }
 
 export default App;

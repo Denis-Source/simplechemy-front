@@ -1,0 +1,22 @@
+@import "../../globals";
+
+.wrapper {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header {
+    text-align: center;
+    font-size: 40px;
+    font-weight: lighter;
+    margin: 0;
+    font-family: $font-family-header;
+}

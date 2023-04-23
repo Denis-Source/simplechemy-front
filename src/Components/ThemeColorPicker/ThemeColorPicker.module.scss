@@ -1,0 +1,45 @@
+@import "../../colors";
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.picker {
+    width: 100px;
+    background: linear-gradient(
+        270deg,
+        #15579999,
+        #ec6ead99,
+        #ef6b5099,
+        #ef8e3899,
+        #f2949299,
+        #dbd5a499,
+        #e7e9bb99,
+        #bdc3c755
+    );
+    height: 8px;
+    border-radius: 10px;
+
+    @media screen and (max-width: $size-mobile) {
+        width: 60px;
+    }
+}
+
+.thumb {
+    cursor: pointer;
+    z-index: 100;
+    border: 8px solid $c-secondary;
+    border-radius: 100%;
+    margin-top: -4px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.icon {
+    width: 25px;
+}

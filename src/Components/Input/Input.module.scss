@@ -1,0 +1,34 @@
+@import "../../globals";
+@import "../../colors";
+
+
+.inputWrapper {
+    gap: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input {
+    resize: none;
+    font-family: $font-family-text;
+    color: $c-secondary;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    background-color: $c-input-background;
+    font-weight: 400;
+    width: calc(100% - 20px);
+
+    &::placeholder {
+        font-family: $font-family-text;
+        color: $c-secondary-light;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}

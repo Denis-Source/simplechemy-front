@@ -1,0 +1,26 @@
+@import "../../globals";
+
+.body {
+    height: 100vh;
+}
+
+.bodyFixed {
+    min-height: 100vh;
+}
+
+.container {
+    height: 100%;
+    padding: 0 20px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    margin: 0 auto;
+
+    @media screen and (max-width: $size-limited) {
+        max-width: 800px;
+    }
+    @media screen and (max-width: $size-mobile) {
+        padding: 0 10px;
+        grid-template-rows: 90px 1fr;
+    }
+}

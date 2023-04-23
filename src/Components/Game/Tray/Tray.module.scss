@@ -1,0 +1,20 @@
+@import "../../../mixins";
+
+.tray {
+  @include m-card-shadowed;
+  border-radius: 0 8px 8px 0;
+  padding: 10px;
+}
+
+.elements {
+  margin-top: 6px;
+  padding: 10px;
+
+  display: grid;;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 100px;
+
+  height: calc(100vh - 235px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
