@@ -5,7 +5,7 @@ import {useDrag} from "react-dnd";
 import {DraggableTypes} from "../../../Reducers/Game";
 
 export interface DraggableElementProps {
-    id: any,
+    uuid: any,
     left: number,
     top: number,
     element: ElementModel
@@ -14,19 +14,18 @@ export interface DraggableElementProps {
 
 export const DraggableElement: FC<DraggableElementProps> = (
     {
-        id, left, top, element
+        uuid, left, top, element
     }) => {
 
     const [{isDragging}, drag] = useDrag(
         () => ({
             type: DraggableTypes.PLACED,
-            item: {id, left, top},
-            end: () => ({}),
+            item: {uuid: uuid, left, top},
             collect: (monitor) => ({
                 isDragging: monitor.isDragging(),
             }),
         }),
-        [id, left, top],
+        [uuid, left, top],
     )
     return (
         isDragging ?

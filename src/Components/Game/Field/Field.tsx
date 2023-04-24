@@ -14,7 +14,7 @@ export interface ContainerState {
 
 export interface DragItem {
     type: string,
-    id: string,
+    uuid: string,
     top: number,
     left: number,
     element: ElementModel | null
@@ -50,37 +50,45 @@ export const Field = () => {
         () => ({
             accept: [DraggableTypes.UNLOCKED, DraggableTypes.PLACED],
             drop(item: DragItem, monitor) {
-                const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
-                const left = clamp(item.left + delta.x, 0, containerWidth - OFFSET);
-                const top = clamp(item.top + delta.y, 0, containerHeight - OFFSET);
-
-                const x = convertToFloat(left, containerWidth, OFFSET);
-                const y = convertToFloat(top, containerHeight, OFFSET);
-
-                switch (monitor.getItemType()) {
-                    case DraggableTypes.PLACED:
-                        dispatch(movePlacedElement({
-                            x,
-                            y,
-                            uuid: item.id
-                        }))
-                        console.log(delta.x, delta.y)
-                        console.log(left, top)
-                        break;
-                    case DraggableTypes.UNLOCKED:
-                        if (item.element) {
-                            dispatch(addPlacedElement(
-                                {
-                                    uuid: "aaa",
-                                    x,
-                                    y,
-                                    element: item.element
-                                }))
-                        }
-                        console.log(delta.x, delta.y)
-                        console.log(left, top)
-                        // console.log(x, y)
-                        break;
+                let delta, top, left, x, y;
+                if (containerRef.current) {
+                    switch (monitor.getItemType()) {
+                        case DraggableTypes.PLACED:
+                            delta = monitor.getDifferenceFromInitialOffset() as XYCoord
+                            left = clamp(item.left + delta.x, 0, containerWidth - OFFSET);
+                            top = clamp(item.top + delta.y, 0, containerHeight - OFFSET);
+                            x = convertToFloat(left, containerWidth, OFFSET);
+                            y = convertToFloat(top, containerHeight, OFFSET);
+                            dispatch(movePlacedElement({
+                                x,
+                                y,
+                                uuid: item.uuid
+                            }))
+                            break;
+                        case DraggableTypes.UNLOCKED:
+                            delta = monitor.getClientOffset() as XYCoord
+                            left = clamp(
+                                delta.x - containerRef.current.getBoundingClientRect().x - OFFSET,
+                                0,
+                                containerWidth - OFFSET);
+                            top = clamp(
+                                delta.y - containerRef.current.getBoundingClientRect().y - OFFSET,
+                                0,
+                                containerHeight - OFFSET);
+                            x = convertToFloat(left, containerWidth, OFFSET);
+                            y = convertToFloat(top, containerHeight, OFFSET);
+                            if (item.element) {
+                                dispatch(addPlacedElement(
+                                    {
+                                        uuid: "aaa",
+                                        x,
+                                        y,
+                                        element: item.element
+                                    }))
+                            }
+                            console.log(item.left, item.top)
+                            break;
+                    }
                 }
 
             },
@@ -96,7 +104,7 @@ export const Field = () => {
                         const {x, y, element} = placedElements[key];
                         return (
                             <DraggableElement
-                                id={key}
+                                uuid={key}
                                 key={key}
                                 left={convertToRelative(x, containerWidth, OFFSET)}
                                 top={convertToRelative(y, containerHeight, OFFSET)}
