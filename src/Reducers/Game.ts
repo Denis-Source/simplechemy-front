@@ -20,15 +20,19 @@ export interface GameState {
             left: number
             element: ElementModel
         }
-    }
+    },
+    fieldWidth: number,
+    fieldHeight: number
 }
 
 const initialGameState = {
     unlockedElements: Array<ElementModel>({
-        "name": "Air",
-        "url": airImage
+        name: "Air",
+        url: airImage
     }),
     users: [],
+    fieldWidth: 0,
+    fieldHeight: 0,
     placedElements: {
         test493854: {
             x: 1,
@@ -56,6 +60,25 @@ export const gameSlice = createSlice({
         setGameState: (state: Draft<GameState>, action: PayloadAction<GameState>) => {
             state = action.payload;
         },
+        setGameFieldSize: (state: Draft<GameState>, action: PayloadAction<{ width: number, height: number }>) => {
+            state.fieldWidth = action.payload.width;
+            state.fieldHeight = action.payload.height;
+        },
+        addPlacedElement: (state: Draft<GameState>, action: PayloadAction<{ x: number, y: number, uuid: string, element: ElementModel }>) => {
+            const newPlacedElement = {
+                [action.payload.uuid]: {
+                    x: action.payload.x,
+                    y: action.payload.y,
+                    element: action.payload.element
+                }
+            }
+            const updatedPlacedElements = {
+                ...state.placedElements,
+                ...newPlacedElement
+            }
+            state.placedElements = updatedPlacedElements as typeof state.placedElements;
+
+        },
         movePlacedElement: (state: Draft<GameState>, action: PayloadAction<{ x: number, y: number, uuid: string }>) => {
             const updatedPlacedElements = {
                 ...state.placedElements,
@@ -76,6 +99,8 @@ export const gameSlice = createSlice({
 
 export const {
     setGameState,
+    setGameFieldSize,
+    addPlacedElement,
     movePlacedElement,
     clearPlacedElements
 } = gameSlice.actions;

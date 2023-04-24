@@ -17,7 +17,7 @@ export const DraggableElement: FC<DraggableElementProps> = (
         id, left, top, element
     }) => {
 
-    const [, drag] = useDrag(
+    const [{isDragging}, drag] = useDrag(
         () => ({
             type: DraggableTypes.PLACED,
             item: {id, left, top},
@@ -29,10 +29,13 @@ export const DraggableElement: FC<DraggableElementProps> = (
         [id, left, top],
     )
     return (
-        <div ref={drag} className={styles.element} style={{position: "absolute", top, left}}>
-            <img className={styles.image} src={element.url} alt={element.name}/>
-            <p className={styles.label}>{element.name}</p>
-        </div>
+        isDragging ?
+            <div ref={drag}/>
+            :
+            <div ref={drag} className={styles.element} style={{position: "absolute", top, left}}>
+                <img className={styles.image} src={element.url} alt={element.name}/>
+                <p className={styles.label}>{element.name}</p>
+            </div>
     );
 };
 
