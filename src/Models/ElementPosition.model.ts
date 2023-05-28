@@ -1,6 +1,6 @@
 import {ElementModel} from "./Element.model";
 
-export interface ElementPosition {
+export interface ElementPositionModel {
     element: ElementModel;
     x: number;
     y: number;

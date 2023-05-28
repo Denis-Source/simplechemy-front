@@ -1,8 +1,10 @@
 import qs from 'qs';
 
 export enum APIRoutes {
+    home = "/",
     login = "/login",
-    register = "/register"
+    register = "/register",
+    refresh = "/refresh"
 }
 
 export const getAPIUrl = (): string|undefined => {
@@ -33,5 +35,6 @@ export const fetchAPI = async (
         console.log(msg, response);
         throw new Error(msg);
     }
+
     return await response.json();
 }

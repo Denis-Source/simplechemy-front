@@ -1,0 +1,23 @@
+@import "../../../mixins";
+@import "../../../colors";
+@import "../../../globals";
+
+.submit {
+  @include m-text;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 8px;
+  margin: 30px 0 10px 0;
+  width: 100%;
+
+  background-color: $c-secondary-light;
+
+  border: 0;
+  border-radius: 5px;
+  transition: background-color $transition-hover;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $c-secondary;
+  }
+}

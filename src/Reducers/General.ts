@@ -1,7 +1,15 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface InitialState {
+export enum AppStates {
+    Nominal = "nominal",
+    Loading = "loading",
+    Errored = "errored",
+}
+
+export interface InitialGeneralState {
     theme: string[];
+    authenticated: boolean;
+    appState: AppStates;
 }
 
 export const BACKGROUND_COLORS = [
@@ -15,8 +23,10 @@ export const BACKGROUND_COLORS = [
     ["#59c173", "#5d26c1"],
 ];
 
-const initialState: InitialState = {
+const initialState: InitialGeneralState = {
     theme: BACKGROUND_COLORS[0],
+    authenticated: false,
+    appState: AppStates.Loading
 };
 
 export const generalSlice = createSlice({
@@ -26,10 +36,18 @@ export const generalSlice = createSlice({
         setTheme: (state, action: PayloadAction<number>) => {
             state.theme = BACKGROUND_COLORS[action.payload];
         },
+        setAuthenticated: (state, action: PayloadAction<boolean>) => {
+            state.authenticated = action.payload;
+        },
+        setAppState: (state, action: PayloadAction<AppStates>) => {
+            state.appState = action.payload;
+        }
     },
 });
 
 export const {
     setTheme,
+    setAuthenticated,
+    setAppState
 } = generalSlice.actions;
 export default generalSlice.reducer;

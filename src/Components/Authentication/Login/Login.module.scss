@@ -1,0 +1,31 @@
+@import "../../../globals";
+@import "../../../mixins";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -100px;
+}
+
+.container {
+  @include m-card-shadowed;
+  width: 300px;
+}
+
+.header {
+  @include m-header;
+  margin-bottom: 10px;
+}
+
+.label {
+  @include m-text;
+  font-size: 17px;
+  margin: 20px 0 5px 0;
+  display: inline-block;
+}
+
+.registerLink {
+  @include m-text;
+  text-align: center;
+}

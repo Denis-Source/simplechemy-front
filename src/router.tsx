@@ -1,10 +1,9 @@
 import {createBrowserRouter} from "react-router-dom";
 
 import React from "react";
-import BaseLayout from "./Layouts/BaseLayout/BaseLayout";
-import Game from "./Components/Game/Game";
-import Login from "./Components/Authentication/Login/Login";
-import Register from "./Components/Authentication/Registration/Register";
+import LoadingLayout from "./Layouts/LoadingLayout/LoadingLayout";
+import RegisterLayout from "./Layouts/RegisterLayout/RegisterLayout";
+import GameLayout from "./Layouts/GameLayout/GameLayout";
 
 export enum RouterPaths {
     HomePage = "/",
@@ -16,64 +15,22 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element:
-            <BaseLayout>
-                <Game/>
-            </BaseLayout>,
-        errorElement: (
-            // <ErrorLayout
-            //     message={Strings.NoPageFound}
-            //     description={Strings.GoBack}
-            // />
-            <p>bbb</p>
-        ),
+            <GameLayout/>
     },
+
     {
         path: "/login",
         element:
-            <BaseLayout>
-                <Login/>
-            </BaseLayout>,
-        errorElement: (
-            // <ErrorLayout
-            //     message={Strings.NoPageFound}
-            //     description={Strings.GoBack}
-            // />
-            <p>bbb</p>
-        ),
+            <LoadingLayout/>
     },
 
     {
         path: "/register",
         element:
-            <BaseLayout>
-                <Register/>
-            </BaseLayout>,
-        errorElement: (
-            // <ErrorLayout
-            //     message={Strings.NoPageFound}
-            //     description={Strings.GoBack}
-            // />
-            <p>bbb</p>
-        ),
+            <RegisterLayout/>
+    },
+    {
+        path: "/list",
+
     }
-    // {
-    //     path: "/room/:roomUuid",
-    //     element: <RoomLayout/>,
-    //     errorElement: (
-    //         <ErrorLayout
-    //             message={ErrorMessages.Unknown}
-    //             description={Strings.GoBack}
-    //         />
-    //     ),
-    // },
-    // {
-    //     path: "/info",
-    //     element: <InfoLayout/>,
-    //     errorElement: (
-    //         <ErrorLayout
-    //             message={ErrorMessages.Unknown}
-    //             description={Strings.GoBack}
-    //         />
-    //     ),
-    // },
 ]);

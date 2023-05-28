@@ -2,9 +2,8 @@ import React from "react";
 import styles from "./BaseLayout.module.scss";
 import Header from "../../Components/Header/Header";
 import {useSelector} from "react-redux";
-// import { AppStates, ErrorMessages } from "../../Reducers/General";
-// import Spinner from "../../Components/Spinner/Spinner";
-// import ErrorTab from "../../Components/Tabs/ErrorTab/ErrorTab";
+import {AppStates} from "../../Reducers/General";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const BaseLayout = ({
                         children,
@@ -12,6 +11,20 @@ const BaseLayout = ({
     children?: JSX.Element | [JSX.Element];
 }) => {
     const theme: string[] = useSelector((state: any) => state.general.theme);
+    const appState = useSelector((state: any) => state.general.appState);
+    let elements;
+
+    switch (appState) {
+        case AppStates.Nominal:
+            elements = <div className={styles.container}>
+                <Header/>
+                {children}
+            </div>
+            break;
+        case AppStates.Loading:
+            elements = <Spinner/>
+            break;
+    }
 
     return (
         <div
@@ -20,10 +33,7 @@ const BaseLayout = ({
                 background: `linear-gradient(135deg, ${theme[0]}, ${theme[1]})`,
             }}
         >
-            <div className={styles.container}>
-                <Header/>
-                {children}
-            </div>
+            {elements}
         </div>
     );
 };
