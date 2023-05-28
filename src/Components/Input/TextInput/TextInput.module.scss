@@ -1,5 +1,5 @@
-@import "../../globals";
-@import "../../colors";
+@import "../../../globals";
+@import "../../../colors";
 
 
 .inputWrapper {
@@ -12,7 +12,7 @@
 .input {
     resize: none;
     font-family: $font-family-text;
-    color: $c-secondary;
+    color: $c-primary;
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
@@ -23,7 +23,7 @@
 
     &::placeholder {
         font-family: $font-family-text;
-        color: $c-secondary-light;
+        color: $c-primary-light;
         font-weight: 400;
         font-size: 16px;
     }

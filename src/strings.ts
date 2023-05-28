@@ -1,6 +1,27 @@
 export enum Strings {
     Header = "Simplechemy",
 
+    // Form generals
+    FormUsernameP = "type your username",
+    FormUsernameL = "Username",
+    FormUserUUIDP = "type your UUID",
+    FormUserUUIDL = "user UUID",
+    FormPasswordP = "type your password",
+    FormPasswordL = "Password",
+
+    // Login
+    LoginHeader = "Login",
+    LoginSubmit = "Sing In",
+    LoginRegisterDesc = "Don't have an account?",
+    LoginRegister = "Sing Up",
+
+    // Register
+    RegisterHeader = "Register",
+    RegisterSubmit = "Sing Up",
+    RegisterLoginDesc = "Already have an account?",
+    RegisterLogin = "Sing In",
+
+    // Field
     SearchPlaceholder = "Search",
     ListRoomHeader = "Select Room",
 

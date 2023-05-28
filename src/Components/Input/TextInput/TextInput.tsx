@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Input.module.scss";
+import styles from "./TextInput.module.scss";
 
-const Input = ({
+const TextInput = ({
     setString,
     placeholder,
 }: {
@@ -20,4 +20,4 @@ const Input = ({
     );
 };
 
-export default Input;
+export default TextInput;

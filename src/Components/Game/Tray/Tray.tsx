@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from "./Tray.module.scss"
 import Element from "../Element/Element";
-import Input from "../../Input/Input";
+import TextInput from "../../Input/TextInput/TextInput";
 import {useSelector} from "react-redux";
 import {ElementModel} from "../../../Models/Element.model";
 
@@ -12,7 +12,7 @@ const Tray = () => {
 
     return (
         <div className={styles.tray}>
-            <Input setString={setElementFilter} placeholder={"Search"}/>
+            <TextInput setString={setElementFilter} placeholder={"Search"}/>
             <div className={styles.elements}>
                 {unlockedElements.filter(element => element.name.toLowerCase().includes(elementFilter.toLowerCase()))
                     .map((element, index) =>
