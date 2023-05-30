@@ -29,7 +29,8 @@ const Register = () => {
             method: "POST"
         }
         const response = await fetchAPI(APIRoutes.register, options, params);
-        const user = response.instance;
+        const message = await response.json()
+        const user = message.instance;
         dispatch(setUserUUID(user.uuid));
 
         setCookie("userUUID", user.uuid, {

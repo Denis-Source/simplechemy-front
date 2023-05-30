@@ -7,9 +7,23 @@ export enum APIRoutes {
     refresh = "/refresh"
 }
 
-export const getAPIUrl = (): string|undefined => {
-    // TODO
+export const getAPIUrl = (): string => {
+    // TODO add proper .env handling
     return "http://localhost:8888";
+}
+
+export const getAPIWSUrl = (): string => {
+    // TODO
+    return "ws://localhost:8888";
+}
+
+export const getWSAuthMessage = (token: string): object => {
+    return {
+        message: "authentication",
+        payload: {
+            token: token
+        }
+    }
 }
 
 export const fetchAPI = async (
@@ -28,13 +42,21 @@ export const fetchAPI = async (
     const response = await fetch(url, options);
 
     console.log(`Fetching ${url}`);
+    return response;
+}
 
-    // TODO add custom message handling
-    if (!response.ok) {
-        const msg = "Error fetching data";
-        console.log(msg, response);
-        throw new Error(msg);
+export const processMessage = (data: any) => {
+    /*
+        Processes the incoming data
+        Adds log item to the state
+    */
+
+    // Get type of the message and payload
+    const type = data.payload.message;
+    const payload = data.payload;
+    console.log(`Message of type: ${type} with payload: ${payload}`);
+
+    switch (type) {
+
     }
-
-    return await response.json();
 }

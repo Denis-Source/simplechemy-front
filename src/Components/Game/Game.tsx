@@ -12,7 +12,7 @@ const Game = () => {
 
     useEffect(()=> {
         !authenticated && navigate(APIRoutes.login);
-    }, [authenticated])
+    }, [authenticated, navigate])
 
     return (
         <div className={styles.game}>

@@ -13,12 +13,12 @@ import {AppStates, setAppState, setAuthenticated} from "../../../Reducers/Genera
 const Login = () => {
     const [userUUID, setUserUUID] = useState("");
     const [password, setPassword] = useState("");
+    const [cookies, setCookie] = useCookies(["userUUID", "authToken"]);
 
     useEffect(() => {
         cookies.userUUID && setUserUUID(cookies.userUUID);
-    });
+    }, [setUserUUID, cookies]);
     const dispatch = useDispatch();
-    const [cookies, setCookie] = useCookies(["userUUID", "authToken"]);
 
     const authenticated = useSelector((state: any) => state.general.authenticated)
     const navigate = useNavigate();
@@ -34,7 +34,8 @@ const Login = () => {
             method: "POST"
         }
         const response = await fetchAPI(APIRoutes.login, options, params);
-        const token = response.token;
+        const message = await response.json();
+        const token = message.token
 
         dispatch(setAuthenticationToken(token));
         dispatch(setAuthenticated(true));
@@ -42,13 +43,12 @@ const Login = () => {
             path: "/",
             maxAge: 356 * 24 * 60 * 60,
         });
-        dispatch(setAppState(AppStates.Nominal))
         navigate(APIRoutes.home);
     }
 
     useEffect(() => {
         authenticated && navigate(APIRoutes.home);
-    }, [authenticated])
+    }, [authenticated, navigate])
 
     return (
         <div className={styles.wrapper}>
